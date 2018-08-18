@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.countries = this.myService.country;
-    console.log('Country', this.countries);
+    // console.log('Country', this.countries);
     this.states = this.myService.state;
     this.cities = this.myService.city;
   }

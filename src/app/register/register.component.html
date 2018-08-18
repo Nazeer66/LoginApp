@@ -24,14 +24,19 @@
     <input type="text" name="confirm-password" #confirmPassword="ngModel" [(ngModel)]="confirmPassword1" pattern="password1" appConfirmEqualValidator="password" tabindex="2" class="form-control" placeholder="Confirm Password" required>
     <!-- <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.required">Confirm Password is required</span> -->
     <div class="alert alert-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
-        <div *ngIf="confirmPassword.touched && confirmPassword.errors.required">Confirm passowrd is required</div>
-      <div *ngIf="password1 != confirmPassword1">Password does not match</div>
+        <div *ngIf="confirmPassword.errors.required">Confirm passowrd is required</div>
+      <div *ngIf="password1 !== confirmPassword1">Password does not match</div>
     </div>
   </div>
 
 
   <div class="form-group">
-      <input type="text" name="phone" ngModel tabindex="2" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone Number" required>
+      <input type="text" name="phone" #phone="ngModel" ngModel minlength="10" tabindex="2" class="form-control" placeholder="Phone Number" required>
+      <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">
+          <div *ngIf="phone.errors.required">Phone Number is required.</div>
+          <div *ngIf="phone.errors.minlength">Phone Number must be 10 characters long.</div>
+          <div *ngIf="phone.errors.pattern">Username Pattern does not match</div>
+        </div>
   </div>
 
    
@@ -51,8 +56,12 @@
       </select>
   </div>
   <div class="form-group">
-      <textarea class="form-control" ngModel #address="ngModel" name="Address" rows="5" placeholder="Enter Address here"></textarea>
-    </div>
+      <textarea class="form-control" ngModel #address="ngModel" minlength="10" name="Address" rows="5" placeholder="Enter Address here"></textarea>
+      <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+          <div *ngIf="address.errors.required">Address is required.</div>
+          <div *ngIf="address.errors.minlength">Address needs minimum length</div>
+      </div>  
+  </div>
   <div class="form-group">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
@@ -62,4 +71,4 @@
   </div>
 </form>
 
-Angular validation : {{register.value | json}}
+<!-- Angular validation : {{register.value | json}} -->
