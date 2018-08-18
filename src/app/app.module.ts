@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
+import { ConfirmPasswordDirective } from './confirm-password.directive';
 
 const routes : Routes = [
   {
@@ -33,7 +34,8 @@ const routes : Routes = [
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    HomeComponent
+    HomeComponent,
+    ConfirmPasswordDirective
   ],
   imports: [
     BrowserModule,
