@@ -20,7 +20,13 @@ export class UserServiceService {
   {
      return this.http.post("http://localhost:3000/login", data);
   }
- 
+ loggedIn(){
+   return !!localStorage.getItem('token');
+ }
+ getToken(){
+   console.log("GetMyToken",localStorage.getItem('token'))
+   return localStorage.getItem('token');
+ }
 
 
 }

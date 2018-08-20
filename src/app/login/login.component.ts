@@ -15,12 +15,14 @@ msg;
   ngOnInit() {
   }
   loginData(f:NgForm){
-    console.log(f.value);
+    console.log("f",f.value);
     this.userSer.LoginUser(f.value).subscribe((data:any)=>{
-      console.log(data.length);
+      // console.log(data.length);
       if(data.length == 0){
         this.msg =" Invalid User";
       }else{
+        console.log("login",data);
+        localStorage.setItem('token', data.token);
         this.msg = " Login successfull";
         this.router.navigate(['/home']);
         // this.userSer.show;

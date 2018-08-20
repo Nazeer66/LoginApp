@@ -1,3 +1,5 @@
+import { TokenInterceptorService } from './token-interceptor.service';
+import { AuthGuard } from './auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
@@ -16,7 +18,7 @@ const routes : Routes = [
     path:'', component:LoginComponent
   },
   {
-    path:'home', component:HomeComponent
+    path:'home', component:HomeComponent, canActivate:[AuthGuard]
   },
   {
     path: 'login' , component: LoginComponent
@@ -43,7 +45,11 @@ const routes : Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AuthGuard, {
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

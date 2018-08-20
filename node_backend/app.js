@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const bodyparser = require('body-parser');
 const mongoClient = require('mongodb').MongoClient;
 
@@ -39,7 +40,10 @@ app.post('/register', (req, res)=>{
             console.log(err);
         }else{
             console.log(data);
-            res.json("user successfully registered");
+            let payload = {subject: data._id};
+            let token = jwt.sign(payload, 'secretkey')
+            res.status(200).send({token});
+            // res.json("user successfully registered");
         }
     })
 });
@@ -52,7 +56,11 @@ app.post('/login', (req, res)=>{
             console.log(error);
         }else{
             console.log(data);
-            res.json(data);
+            let payload = {subject: data._id};
+            let token = jwt.sign(payload, 'secretkey')
+            console.log("login",token);
+            res.status(200).send({token});
+            // res.json(token);
         }
     })
 })
